@@ -18,11 +18,17 @@ def food_points(nb_food: int) -> tuple:
 
 a, b = food_points(5)
 
-# z = tuple(i for i in zip(a, b))
-# print(z)
-z = ((3, 2), (4, 5), (6, 7), (9, 7))
+z = tuple(i for i in zip(a, b))
+print(z)
 
-y = z[2]
+x = [random.randint(1, 20)]
+y = [random.randint(1, 20)]
+pv = [20]
 
-w = 'true' if (7, 9) in z else "false"
-print(w)
+indextocheck = [x[len(x) - 1], y[len(y) - 1]]
+print(tuple(indextocheck))
+for x in range(10):
+
+    pv.append(20) if tuple(indextocheck) in z else pv.append(pv[len(pv)-1]-2)
+
+print(pv)
