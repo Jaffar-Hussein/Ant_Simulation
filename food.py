@@ -1,3 +1,4 @@
+from ant_animate import Visual_App
 import random
 
 
@@ -16,7 +17,8 @@ def food_points(nb_food: int) -> tuple:
     # return coodinator
 
 
-a, b = food_points(5)
+fooooood = food_points(15)
+a, b = fooooood
 
 z = tuple(i for i in zip(a, b))
 print(z)
@@ -25,7 +27,7 @@ x = [random.randint(1, 20)]
 y = [random.randint(1, 20)]
 pv = [20]
 
-while len(x) <= 9:
+while len(x) <= 10 and len(pv) <= 10:
     directions = ['south', 'north', 'east', 'west']
     indextocheck = [x[len(x) - 1], y[len(y) - 1]]
     print(indextocheck)
@@ -38,7 +40,7 @@ while len(x) <= 9:
     print(f"pv is {pv}")
     if a == 'east':
         x.append((x[len(x) - 1] + 1))
-        y.append(x[len(x) - 1])
+        y.append(y[len(y) - 1])
     elif a == 'west':
         x.append(x[len(x) - 1] + 1)
         y.append(y[len(y) - 1])
@@ -48,21 +50,30 @@ while len(x) <= 9:
     elif a == 'north':
         y.append(y[len(y) - 1] + 1)
         x.append(x[len(x) - 1])
-    xval, yval = indextocheck
+    indextocheck2 = [x[len(x) - 1], y[len(y) - 1]]
+    xval, yval = indextocheck2
     print(f"x value {xval}")
     print(f"y value {yval}")
-    if xval == 1:
+    if xval <= 1:
         x.append(20)
-        y.append(x[len(y) - 1])
-    elif yval == 1:
+        y.append(y[len(y) - 1])
+    elif yval <= 1:
         x.append(x[len(x) - 1])
         y.append(20)
-    if xval == 20:
+    if xval >= 20:
         x.append(1)
         y.append(x[len(y) - 1])
-    elif yval == 20:
+    elif yval >= 20:
         x.append(x[len(x) - 1])
         y.append(1)
 
+ants_dict = {0: {
+    "x": x,
+    'y': y,
+    'pv': pv
+}}
+delay = 2000
+foodx, foody = fooooood
 
-
+app = Visual_App(ants_dict, foodx, foody, pv=20, delay=delay)
+app.run()
