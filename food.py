@@ -25,7 +25,7 @@ x = [random.randint(1, 20)]
 y = [random.randint(1, 20)]
 pv = [20]
 
-for b in range(10):
+while len(x) <= 9:
     directions = ['south', 'north', 'east', 'west']
     indextocheck = [x[len(x) - 1], y[len(y) - 1]]
     print(indextocheck)
@@ -48,4 +48,21 @@ for b in range(10):
     elif a == 'north':
         y.append(y[len(y) - 1] + 1)
         x.append(x[len(x) - 1])
+    xval, yval = indextocheck
+    print(f"x value {xval}")
+    print(f"y value {yval}")
+    if xval == 1:
+        x.append(20)
+        y.append(x[len(y) - 1])
+    elif yval == 1:
+        x.append(x[len(x) - 1])
+        y.append(20)
+    if xval == 20:
+        x.append(1)
+        y.append(x[len(y) - 1])
+    elif yval == 20:
+        x.append(x[len(x) - 1])
+        y.append(1)
+
+
 
