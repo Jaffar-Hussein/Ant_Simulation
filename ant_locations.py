@@ -74,9 +74,9 @@ for b in range(2):
     for c in range(len(x)):
         if x[c] in interx and y[c] in intery:
             pv.append(20)
-            print("x:------   ",x[c])
+            print("x:------   ", x[c])
 
-            print("y:-----   ",y[c])
+            print("y:-----   ", y[c])
 
         else:
             pv.append(pv[c] - 2)
@@ -89,5 +89,3 @@ for b in range(2):
         'y': y,
         'pv': pv
     }
-#
-
