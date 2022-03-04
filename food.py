@@ -25,10 +25,27 @@ x = [random.randint(1, 20)]
 y = [random.randint(1, 20)]
 pv = [20]
 
-indextocheck = [x[len(x) - 1], y[len(y) - 1]]
-print(tuple(indextocheck))
-for x in range(10):
+for b in range(10):
+    directions = ['south', 'north', 'east', 'west']
+    indextocheck = [x[len(x) - 1], y[len(y) - 1]]
+    print(indextocheck)
+    print(tuple(indextocheck))
+    a = random.choice(directions)
+    pv.append(20) if tuple(indextocheck) in z else pv.append(pv[len(pv) - 1] - 2)
+    print(f"direction is {a}")
+    print(f"x is {x}")
+    print(f"y is {y}")
+    print(f"pv is {pv}")
+    if a == 'east':
+        x.append((x[len(x) - 1] + 1))
+        y.append(x[len(x) - 1])
+    elif a == 'west':
+        x.append(x[len(x) - 1] + 1)
+        y.append(y[len(y) - 1])
+    elif a == 'south':
+        y.append(y[len(y) - 1] - 1)
+        x.append(x[len(x) - 1])
+    elif a == 'north':
+        y.append(y[len(y) - 1] + 1)
+        x.append(x[len(x) - 1])
 
-    pv.append(20) if tuple(indextocheck) in z else pv.append(pv[len(pv)-1]-2)
-
-print(pv)
