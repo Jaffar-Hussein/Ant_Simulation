@@ -17,33 +17,39 @@ def food_points(nb_food: int) -> tuple:
     # return coodinator
 
 
+fooooood = food_points(15)
+
+
 def ant_creator():
-    fooooood = food_points(15)
+    global fooooood
+
     a, b = fooooood
 
     z = tuple(i for i in zip(a, b))
-    print(z)
+    # print(z)
 
     x = [random.randint(1, 20)]
     y = [random.randint(1, 20)]
     pv = [20]
 
     while len(x) <= 10 and len(pv) <= 10:
-        directions = ['south', 'north', 'east', 'west']
+        # pv check
         indextocheck = [x[len(x) - 1], y[len(y) - 1]]
-        print(indextocheck)
-        print(tuple(indextocheck))
-        a = random.choice(directions)
         pv.append(20) if tuple(indextocheck) in z else pv.append(pv[len(pv) - 1] - 2)
-        print(f"direction is {a}")
+        # print(indextocheck)
+        # print(tuple(indextocheck))
+        # Direction check
+        directions = ['south', 'north', 'east', 'west']
+        a = random.choice(directions)
         print(f"x is {x}")
         print(f"y is {y}")
         print(f"pv is {pv}")
+        print(f"direction is {a}")
         if a == 'east' and x[len(x) - 1] < 20:
             x.append((x[len(x) - 1] + 1))
             y.append(y[len(y) - 1])
         elif a == 'west' and x[len(x) - 1] > 1:
-            x.append(x[len(x) - 1] + 1)
+            x.append(x[len(x) - 1] - 1)
             y.append(y[len(y) - 1])
         elif a == 'south' and y[len(y) - 1] > 1:
             y.append(y[len(y) - 1] - 1)
@@ -51,44 +57,61 @@ def ant_creator():
         elif a == 'north' and y[len(y) - 1] < 20:
             y.append(y[len(y) - 1] + 1)
             x.append(x[len(x) - 1])
-        # indextocheck2 = [x[len(x) - 1], y[len(y) - 1]]
-        # xval, yval = indextocheck2
-        # print(f"x value {xval}")
-        # print(f"y value {yval}")
-        # if xval <= 1:
-        #     x.append(20)
-        #     y.append(y[len(y) - 1])
-        # elif yval <= 1:
-        #     x.append(x[len(x) - 1])
-        #     y.append(20)
-        # if xval >= 20:
-        #     x.append(1)
-        #     y.append(x[len(y) - 1])
-        # elif yval >= 20:
-        #     x.append(x[len(x) - 1])
-        #     y.append(1)
-    return x, y, pv, fooooood
+    ant = {
+        "x": x,
+        "y": y,
+        "pv": pv
+    }
+
+    return ant
 
 
-def ant_generator(n):
-    for x in range(n):
-        ants_dictionary = {
-            n: {
-                "x": x,
-                "y": y,
-                "pv": pv
+def ant_multiplier():
+    ant_dict = {}
+    for w in range(8):
+        ant_dict[w] = ant_creator()
+        print('=' * 50)
+    return ant_dict
+    # print(*ant_dict.values())
 
-            }
-        }
-    return ants_dictionary
 
-ants_dict = {0: {
-    "x": x,
-    'y': y,
-    'pv': pv
-}}
-delay = 2000
+# indextocheck2 = [x[len(x) - 1], y[len(y) - 1]]
+# xval, yval = indextocheck2
+# print(f"x value {xval}")
+# print(f"y value {yval}")
+# if xval <= 1:
+#     x.append(20)
+#     y.append(y[len(y) - 1])
+# elif yval <= 1:
+#     x.append(x[len(x) - 1])
+#     y.append(20)
+# if xval >= 20:
+#     x.append(1)
+#     y.append(x[len(y) - 1])
+# elif yval >= 20:
+#     x.append(x[len(x) - 1])
+#     y.append(1)
+
+# def ant_generator(n):
+#     ant_creator()
+#     for w in range(n):
+#         ants_dictionary = {
+#             n: {
+#                 "x": x,
+#                 "y": y,
+#                 "pv": pv
+#
+#             }
+#         }
+#     return ants_dictionary
+
+# ants_dict = {0: {
+#     "x": x,
+#     'y': y,
+#     'pv': pv
+# }}
+delay = 750
 foodx, foody = fooooood
-
-app = Visual_App(ants_dict, foodx, foody, pv=20, delay=delay)
+#
+app = Visual_App(ant_multiplier(), foodx, foody, pv=20, delay=delay)
 app.run()
