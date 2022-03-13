@@ -17,62 +17,72 @@ def food_points(nb_food: int) -> tuple:
     # return coodinator
 
 
-fooooood = food_points(15)
+def ant_creator(ants_number, food_number):
+    """
 
+    :return:
 
-def ant_creator():
-    global fooooood
+    """
 
-    a, b = fooooood
+    foodx, foody = food_points(food_number)
+    ant_dict = {
 
-    z = tuple(i for i in zip(a, b))
-    # print(z)
-
-    x = [random.randint(1, 20)]
-    y = [random.randint(1, 20)]
-    pv = [20]
-
-    while len(x) <= 10 and len(pv) <= 10:
-        # pv check
-        indextocheck = [x[len(x) - 1], y[len(y) - 1]]
-        pv.append(20) if tuple(indextocheck) in z else pv.append(pv[len(pv) - 1] - 2)
-        # print(indextocheck)
-        # print(tuple(indextocheck))
-        # Direction check
-        directions = ['south', 'north', 'east', 'west']
-        a = random.choice(directions)
-        print(f"x is {x}")
-        print(f"y is {y}")
-        print(f"pv is {pv}")
-        print(f"direction is {a}")
-        if a == 'east' and x[len(x) - 1] < 20:
-            x.append((x[len(x) - 1] + 1))
-            y.append(y[len(y) - 1])
-        elif a == 'west' and x[len(x) - 1] > 1:
-            x.append(x[len(x) - 1] - 1)
-            y.append(y[len(y) - 1])
-        elif a == 'south' and y[len(y) - 1] > 1:
-            y.append(y[len(y) - 1] - 1)
-            x.append(x[len(x) - 1])
-        elif a == 'north' and y[len(y) - 1] < 20:
-            y.append(y[len(y) - 1] + 1)
-            x.append(x[len(x) - 1])
-    ant = {
-        "x": x,
-        "y": y,
-        "pv": pv
     }
+    for one_ant in range(ants_number):
 
-    return ant
+        z = tuple(i for i in zip(foodx, foody))
+        # print(z)
+
+        x = [random.randint(1, 20)]
+        y = [random.randint(1, 20)]
+        pv = [20]
+
+        while len(x) <= 10 and len(pv) <= 10:
+            # pv check
+            indextocheck = [x[len(x) - 1], y[len(y) - 1]]
+            pv.append(20) if tuple(indextocheck) in z else pv.append(pv[len(pv) - 1] - 2)
+            # print(indextocheck)
+            # print(tuple(indextocheck))
+            # Direction check
+            directions = ['south', 'north', 'east', 'west']
+            direction = random.choice(directions)
+            # print(f"x is {x}")
+            # print(f"y is {y}")
+            # print(f"pv is {pv}")
+            # print(f"direction is {foodx}")
+            if direction == 'east' and x[len(x) - 1] < 20:
+                x.append((x[len(x) - 1] + 1))
+                y.append(y[len(y) - 1])
+            elif direction == 'west' and x[len(x) - 1] > 1:
+                x.append(x[len(x) - 1] - 1)
+                y.append(y[len(y) - 1])
+            elif direction == 'south' and y[len(y) - 1] > 1:
+                y.append(y[len(y) - 1] - 1)
+                x.append(x[len(x) - 1])
+            elif direction == 'north' and y[len(y) - 1] < 20:
+                y.append(y[len(y) - 1] + 1)
+                x.append(x[len(x) - 1])
+        ant = {
+            "x": x,
+            "y": y,
+            "pv": pv
+        }
+        ant_dict[one_ant] = ant
+
+    return (ant_dict,
+            foodx,
+            foody
+            )
 
 
-def ant_multiplier():
-    ant_dict = {}
-    for w in range(8):
-        ant_dict[w] = ant_creator()
-        print('=' * 50)
-    return ant_dict
-    # print(*ant_dict.values())
+#
+# def ant_multiplier():
+#     ant_dict = {}
+#     for w in range(8):
+#         ant_dict[w] = ant_creator()
+#         print('=' * 50)
+#     return ant_dict
+# print(*ant_dict.values())
 
 
 # indextocheck2 = [x[len(x) - 1], y[len(y) - 1]]
@@ -111,7 +121,10 @@ def ant_multiplier():
 #     'pv': pv
 # }}
 delay = 750
-foodx, foody = fooooood
+
+# print(ant_creator(5,15)
+#       )
+ant_dict, foodx, foody = ant_creator(5, 15)
 #
-app = Visual_App(ant_multiplier(), foodx, foody, pv=20, delay=delay)
+app = Visual_App(ant_dict, foodx, foody, pv=20, delay=delay)
 app.run()
