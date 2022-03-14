@@ -37,19 +37,19 @@ def ant_creator(ants_number, food_number):
         y = [random.randint(1, 20)]
         pv = [20]
 
-        while len(x) <= 10 and len(pv) <= 10:
+        while pv[len(pv) - 1] > 1:
             # pv check
             indextocheck = [x[len(x) - 1], y[len(y) - 1]]
             pv.append(20) if tuple(indextocheck) in z else pv.append(pv[len(pv) - 1] - 2)
-            # print(indextocheck)
-            # print(tuple(indextocheck))
+            print(indextocheck)
+            print(tuple(indextocheck))
             # Direction check
             directions = ['south', 'north', 'east', 'west']
             direction = random.choice(directions)
-            # print(f"x is {x}")
-            # print(f"y is {y}")
-            # print(f"pv is {pv}")
-            # print(f"direction is {foodx}")
+            print(f"x is {x}")
+            print(f"y is {y}")
+            print(f"pv is {pv}")
+            print(f"direction is {foodx}")
             if direction == 'east' and x[len(x) - 1] < 20:
                 x.append((x[len(x) - 1] + 1))
                 y.append(y[len(y) - 1])
