@@ -108,14 +108,9 @@ class Ant:
         x_cur, y_cur = self.coords_list[self.time_cur]
         self.time_cur += 1
         x_next, y_next = self.coords_list[self.time_cur]
-
-        print('Time {}/{}; ant {} will now move from x {} to x {} and from y {} to y {}; Life: {}'.format(self.time_cur,
-                                                                                                          self.time_max,
-                                                                                                          self.id,
-                                                                                                          x_cur, x_next,
-                                                                                                          y_cur, y_next,
-                                                                                                          self.life[
-                                                                                                              self.time_cur]))
+        #
+        # print('Time {}/{}; ant {} will now move from x {} to x {} and from y {} to y {}; Life: {}'.format(
+        #     self.time_cur, self.time_max, self.id, x_cur, x_next, y_cur, y_next, self.life[self.time_cur]))
 
         x_last, y_last = self.map_coords((x_cur, y_cur))
         x, y = self.map_coords((x_next, y_next))
