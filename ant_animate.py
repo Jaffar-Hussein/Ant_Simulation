@@ -221,7 +221,7 @@ class Visual_App(tk.Tk):
 
         return new_ants_dict
 
-    def run(self):
+    def run(self) -> object:
         self.update()
         self.resizable(True, True)
         self.mainloop()
